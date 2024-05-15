@@ -1,4 +1,4 @@
-def remove_duplicates_sort_integers(input_file, output_file):
+def remove_duplicates(input_file, output_file):
   """
   Reads an input file with integers on each line, removes duplicates, sorts
   the unique integers, and writes them to a new file. Skips lines with invalid
@@ -49,4 +49,4 @@ def remove_duplicates_sort_integers(input_file, output_file):
 # Example usage
 input_file = 'input.txt'
 output_file = 'unique_sorted.txt'
-remove_duplicates_sort_integers(input_file, output_file)
+remove_duplicates(input_file, output_file)
