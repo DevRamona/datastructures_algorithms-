@@ -8,14 +8,14 @@ def remove_duplicates_sort_integers(input_file, output_file):
     input_file: Path to the input file.
     output_file: Path to the output file.
   """
-  seen = set()  # Use a set to store unique integers
+  seen = {}  
 
   with open(input_file, 'r') as infile, open(output_file, 'w') as outfile:
     for line in infile:
-      # Remove leading/trailing whitespace (tabs and spaces)
+    
       line = line.strip()
 
-      # Skip empty lines
+      
       if not line:
         continue
 
@@ -23,7 +23,7 @@ def remove_duplicates_sort_integers(input_file, output_file):
         
         integer = int(line)
       except ValueError:
-    
+        
         continue
 
       
@@ -32,10 +32,21 @@ def remove_duplicates_sort_integers(input_file, output_file):
 
       
       if integer not in seen:
-        seen.add(integer)
-        outfile.write(str(integer) + '\n')
+        seen[integer] = True  
+
+
+  for i in range(len(seen)):
+    for j in range(i + 1, len(seen)):
+      if list(seen.keys())[i] > list(seen.keys())[j]:
+        temp = list(seen.keys())[i]
+        list(seen.keys())[i] = list(seen.keys())[j]
+        list(seen.keys())[j] = temp
 
   
-  seen = sorted(seen)
+  for key in seen:
+    outfile.write(str(key) + '\n')
 
-  
+# Example usage
+input_file = 'input.txt'
+output_file = 'unique_sorted.txt'
+remove_duplicates_sort_integers(input_file, output_file)
