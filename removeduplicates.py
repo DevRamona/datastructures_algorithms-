@@ -5,46 +5,29 @@ def remove_duplicates(input_file, output_file):
   data (empty lines, multiple integers, non-integers).
 
   Args:
-    input_file: Path to the input file.
-    output_file: Path to the output file.
+      input_file: Path to the input file.
+      output_file: Path to the output file.
   """
-  seen = {}  
+  unique_integers = set()
 
   with open(input_file, 'r') as infile, open(output_file, 'w') as outfile:
     for line in infile:
-    
       line = line.strip()
 
-      
       if not line:
         continue
 
       try:
-        
         integer = int(line)
+        unique_integers.add(integer)
       except ValueError:
-        
         continue
 
-      
-      if len(line.split()) > 1:
-        continue
-
-      
-      if integer not in seen:
-        seen[integer] = True  
-
-
-  for i in range(len(seen)):
-    for j in range(i + 1, len(seen)):
-      if list(seen.keys())[i] > list(seen.keys())[j]:
-        temp = list(seen.keys())[i]
-        list(seen.keys())[i] = list(seen.keys())[j]
-        list(seen.keys())[j] = temp
-
+  # Sort the set of unique integers before writing
+  sorted_integers = sorted(unique_integers)
   
-  for key in seen:
-    outfile.write(str(key) + '\n')
+  for integer in sorted_integers:
+    outfile.write(str(integer) + '\n')
 
 # Example usage
 input_file = 'input.txt'
